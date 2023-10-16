@@ -8,15 +8,14 @@
  */
 int _printf(const char *format, ...)
 {
-	unsigned int i = 0, count = 0;
+	int i = 0, count = 0;
 	va_list args;
 
 	va_start(args, format);
 	while (format && format[i])
 	{
-		if (format[i] == '%' &&
-		    (format[i + 1] == 'c' || format[i + 1] == 's' ||
-		     format[i + 1] == '%'))
+		if (format[i] == '%' && (format[i + 1] == 'c' ||
+					format[i + 1] == 's' || format[i + 1] == '%'))
 		{
 			switch (format[i + 1])
 			{
@@ -27,19 +26,19 @@ int _printf(const char *format, ...)
 					count += print_string(args);
 					break;
 				case '%':
-					count += print_percent();
+					count += print_percent(args);
 					break;
 				default:
 					return (-1);
 			}
-			i++;
+			i += 2;
 		}
 		else
 		{
 			write(1, &format[i], 1);
 			count++;
+			i++;
 		}
-		i++;
 	}
 	va_end(args);
 	return (count);

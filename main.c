@@ -1,34 +1,18 @@
-#include <stdio.h>
 #include "main.h"
+#include <stdio.h>
 
 /**
- * main - Entry point, tests the _printf function.
- *
- * Return: Always 0.
+ * main - Entry point
+ * Return: 0 on success
  */
 int main(void)
 {
-    int len1, len2;
+	int len;
 
-    /* Testing character specifier */
-    len1 = _printf("Character:[%c]\n", 'H');
-    len2 = printf("Character:[%c]\n", 'H');
-    _printf("Lengths -> _printf: %d, printf: %d\n", len1, len2);
+	len = _printf("Char: %c, String: %s%%\n", 'A', "I am a string");
+	_printf("Length: %d\n", len);
+	len = _printf("Random stuff %c String: %s%%\n", 'B', "Another string");
+	_printf("Length: %d\n", len);
 
-    /* Testing string specifier */
-    len1 = _printf("String:[%s]\n", "I am a string!");
-    len2 = printf("String:[%s]\n", "I am a string!");
-    _printf("Lengths -> _printf: %d, printf: %d\n", len1, len2);
-
-    /* Testing percent specifier */
-    len1 = _printf("Percent:[%%]\n");
-    len2 = printf("Percent:[%%]\n");
-    _printf("Lengths -> _printf: %d, printf: %d\n", len1, len2);
-
-    /* Testing null string */
-    len1 = _printf("Null String:[%s]\n", NULL);
-    len2 = printf("Null String:[%s]\n", NULL);
-    _printf("Lengths -> _printf: %d, printf: %d\n", len1, len2);
-
-    return (0);
+	return (0);
 }
