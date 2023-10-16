@@ -1,6 +1,4 @@
 #include "main.h"
-#include "print_integer.c"
-#include "print_functions.c"
 
 /**
  * _printf - Our custom printf function.
