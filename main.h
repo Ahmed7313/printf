@@ -1,10 +1,12 @@
 #ifndef MAIN_H
 #define MAIN_H
 
+#include <unistd.h>
 #include <stdarg.h>
 
 int _printf(const char *format, ...);
-int write_string(char *str);
-int _putchar(char c);
+int print_char(va_list args);
+int print_string(va_list args);
+int print_percent(va_list args);
 
 #endif /* MAIN_H */
