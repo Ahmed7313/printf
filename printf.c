@@ -16,7 +16,8 @@ int _printf(const char *format, ...)
 	{
 		if (format[i] == '%' &&
 		    (format[i + 1] == 'c' || format[i + 1] == 's' ||
-		     format[i + 1] == '%' || format[i + 1] == 'd' || format[i + 1] == 'i'))
+		     format[i + 1] == '%' || format[i + 1] == 'd' ||
+			 format[i + 1] == 'i' || format[i + 1] == 'b'))
 		{
 			switch (format[i + 1])
 			{
@@ -32,6 +33,9 @@ int _printf(const char *format, ...)
 				case 'i':
 				case 'd':
 					count += print_intger(args);
+					break;
+				case 'b':
+					count += print_Binary(args);
 					break;
 				default:
 					return (-1);
