@@ -11,6 +11,7 @@ int print_intger(va_list args)
 
 	int n = va_arg(args, int);
 	int copy, tenth, count = 0, size = 1;
+	char digit;
 
 	if (n < 0)
 	{
@@ -35,7 +36,7 @@ int print_intger(va_list args)
 	for ( ; size >= 1; size /= 10)
 	{
 		count++;
-		char digit = (char) (((copy / size) % 10) + '0');
+		digit = (char) (((copy / size) % 10) + '0');
 
 		write(1, &digit, 1);
 	}
