@@ -1,2 +1,1 @@
-# printf
-Creating the printf function project for ALX Software Enginearing program 
+Replicating the printf function in C stdlib for ALX Software Enginearing
