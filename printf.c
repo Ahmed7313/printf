@@ -1,4 +1,6 @@
 #include "main.h"
+#include "print_integer.c"
+#include "print_functions.c"
 
 /**
  * _printf - Our custom printf function.
@@ -14,8 +16,9 @@ int _printf(const char *format, ...)
 	va_start(args, format);
 	while (format && format[i])
 	{
-		if (format[i] == '%' && (format[i + 1] == 'c' ||
-					format[i + 1] == 's' || format[i + 1] == '%'))
+		if (format[i] == '%' &&
+		    (format[i + 1] == 'c' || format[i + 1] == 's' ||
+		     format[i + 1] == '%' || format[i + 1] == 'd' || format[i + 1] == 'i'))
 		{
 			switch (format[i + 1])
 			{
@@ -27,6 +30,10 @@ int _printf(const char *format, ...)
 					break;
 				case '%':
 					count += print_percent(args);
+					break;
+				case 'i':
+				case 'd':
+					count += print_intger(args);
 					break;
 				default:
 					return (-1);
