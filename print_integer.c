@@ -17,6 +17,7 @@ int print_intger(va_list args)
 	{
 		char minus = '-';
 
+		count++;
 		write(1, &minus, 1);
 		copy = n * -1;
 	}
