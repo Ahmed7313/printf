@@ -19,6 +19,6 @@ int print_intger(va_list args, char *buffer, unsigned int *j);
 int print_Binary(va_list args, char *buffer, unsigned int *j);
 int print_unsignedIntger(va_list args, char *buffer, unsigned int *j);
 int print_unsignedOct(va_list args, char *buffer, unsigned int *j);
-
+int print_unsignedHex(va_list args, char *buffer, unsigned int *j, char sp);
 int print_rot13(va_list args, char *buffer, unsigned int *j);
 #endif /* MAIN_H */
