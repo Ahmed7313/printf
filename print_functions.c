@@ -58,14 +58,14 @@ va_list args, char *buffer, unsigned int *j)
 	else if (format[*i + 1] == 's')
 		count += print_str(args, buffer, j);
 	else if (format[*i + 1] == 'i' || format[*i + 1] == 'd')
-		count += print_intger(args);
+		count += print_intger(args, buffer, j);
 	else if (format[*i + 1] == 'b')
-		count += print_Binary(args);
+		count += print_Binary(args, buffer, j);
 	else if (format[*i + 1] == 'u')
-		count += print_unsignedIntger(args);
+		count += print_unsignedIntger(args, buffer, j);
 	else
 	{
-		write(1, &format[*i], 2);
+		buffer[(*j)++] = format[*i];
 		count += 2;
 	}
 	(*i)++;

@@ -3,10 +3,12 @@
 /**
  * print_unsignedIntger - Prints an unsigned intger.
  * @args: The va_list of arguments.
+ * @buffer: The output buffer.
+ * @j: The current buffer index.
  *
  * Return: count of characters typed
  */
-int print_unsignedIntger(va_list args)
+int print_unsignedIntger(va_list args, char *buffer, unsigned int *j)
 {
 	unsigned int number, tmp_number;
 	int count = 0, size = 1;
@@ -25,7 +27,7 @@ int print_unsignedIntger(va_list args)
 	{
 		count++;
 		digit = (char) (((number / size) % 10) + '0');
-		write(1, &digit, 1);
+		buffer[(*j)++] = digit;
 	}
 
 	return (count);

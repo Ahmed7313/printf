@@ -3,10 +3,12 @@
 /**
  * print_Binary - Prints binary represntation of a number.
  * @args: The va_list of arguments.
+ * @buffer: The output buffer.
+ * @j: The current buffer index.
  *
  * Return: count of characters typed
  */
-int print_Binary(va_list args)
+int print_Binary(va_list args, char *buffer, unsigned int *j)
 {
 
 	unsigned int number = va_arg(args, int);
@@ -22,13 +24,13 @@ int print_Binary(va_list args)
 		{
 			count++;
 			digit = '1';
-			write(1, &digit, 1);
+			buffer[(*j)++] = digit;
 		}
 		else if (count > 0)
 		{
 			count++;
 			digit = '0';
-			write(1, &digit, 1);
+			buffer[(*j)++] = digit;
 		}
 	}
 
@@ -36,7 +38,7 @@ int print_Binary(va_list args)
 	{
 		count++;
 		digit = '0';
-		write(1, &digit, 1);
+		buffer[(*j)++] = digit;
 	}
 	return (count);
 }
