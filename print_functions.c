@@ -47,16 +47,16 @@ unsigned int handle_format(const char *format, unsigned int *i, va_list args)
 {
     unsigned int count = 0;
 
-    (*i)++;
-    if (format[*i] == 'c')
+    if (format[*i + 1] == 'c')
         count += print_char(args);
-    else if (format[*i] == 's')
+    else if (format[*i + 1] == 's')
         count += print_str(args);
     else
     {
-        write(1, &format[*i - 1], 2);
+        write(1, &format[*i], 2);
         count += 2;
     }
+    (*i)++;
     return (count);
 }
 
