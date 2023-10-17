@@ -10,6 +10,8 @@ int _printf(const char *format, ...);
 unsigned int handle_format(const char *format, unsigned int *i,
                            va_list args, unsigned int *count);
 int print_char(va_list args);
+unsigned int handle_format(const char *format, unsigned int *i, va_list args);
+unsigned int handle_unformat(char c);
 int print_str(va_list args);
 int print_string(va_list args);
 int print_percent(va_list args);

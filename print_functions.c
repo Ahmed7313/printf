@@ -1,5 +1,7 @@
 #include "main.h"
 #include <unistd.h>
+#include <stdarg.h>
+#include <stddef.h>
 
 /**
  * print_char - Writes a character to stdout
@@ -32,4 +34,39 @@ int print_str(va_list args)
 		count++;
 	}
 	return (count);
+}
+
+/**
+ * handle_format - Handles formatted characters.
+ * @format: The format string.
+ * @i: The current index.
+ * @args: The argument list.
+ * Return: The count of characters printed.
+ */
+unsigned int handle_format(const char *format, unsigned int *i, va_list args)
+{
+	unsigned int count = 0;
+
+	(*i)++;
+	if (format[*i] == 'c')
+		count += print_char(args);
+	else if (format[*i] == 's')
+		count += print_str(args);
+	else
+	{
+		write(1, &format[*i - 1], 2);
+		count += 2;
+	}
+	return (count);
+}
+
+/**
+ * handle_unformat - Handles unformatted characters.
+ * @c: The character to print.
+ * Return: Always 1.
+ */
+unsigned int handle_unformat(char c)
+{
+	write(1, &c, 1);
+	return (1);
 }
