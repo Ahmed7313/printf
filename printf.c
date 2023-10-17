@@ -16,23 +16,15 @@ int _printf(const char *format, ...)
 
 	if (format == NULL)
 		return (-1);
-
 	va_start(args, format);
 	while (format && format[i])
 	{
-		if (format[i] == '%' && format[i + 1] == '\0')
-			return (-1);
-		else if (format[i] == '%' && format[i + 1] == '%')
-		{
-			count += handle_unformat('%');
-			i += 2;
-			continue; /* Add this to skip the i++ at the end of the loop */
-		}
+		if (format[i] == '%' && (format[i + 1] == '\0' || format[i + 1] == '%'))
+			count += handle_unformat(format[i + 1]), i += 2;
 		else if (format[i] == '%')
 			count += handle_format(format, &i, args);
 		else
-			count += handle_unformat(format[i]);
-		i++;
+			count += handle_unformat(format[i]), i++;
 	}
 	va_end(args);
 	return ((count == 0) ? -1 : (int)count);
