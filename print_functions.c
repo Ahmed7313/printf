@@ -55,8 +55,6 @@ unsigned int handle_format(const char *format, unsigned int *i, va_list args)
 		count += print_intger(args);
 	else if (format[*i + 1] == 'b')
 		count += print_Binary(args);
-	else if (format[*i + 1] == 'u')
-		count += print_unsignedIntger(args);
 	else
 	{
 		write(1, &format[*i], 2);
