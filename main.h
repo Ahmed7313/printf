@@ -7,8 +7,7 @@
 
 /* Function Prototypes */
 int _printf(const char *format, ...);
-void handle_percent(const char *format, unsigned int *i,
-                    va_list args, unsigned int *count);
+unsigned int handle_format(const char *format, unsigned int *i, va_list args);
 int print_char(va_list args);
 int print_str(va_list args);
 int print_string(va_list args);
