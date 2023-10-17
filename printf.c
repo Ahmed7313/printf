@@ -20,18 +20,27 @@ int _printf(const char *format, ...)
 	va_start(args, format);
 	while (format && format[i])
 	{
-		if (format[i] == '%' && (format[i + 1] == 'c' || format[i + 1] == 's'))
+		if (format[i] == '%' && format[i + 1] == '%')
+		{
+			write(1, "%", 1);
+			count++;
+			i += 2;
+			continue;
+		}
+		else if (format[i] == '%' &&
+			 (format[i + 1] == 'c' || format[i + 1] == 's'))
 		{
 			i++;
-			if (format[i] == 'c')
-				count += print_char(args);
-			else if (format[i] == 's')
-				count += print_str(args);
+			count += (format[i] == 'c') ? print_char(args) : print_str(args);
 		}
-		else if (format[i] == '%' && (format[i + 1] != 'c' && format[i + 1] != 's'))
+		else if (format[i] == '%' &&
+			 format[i + 1] != 'c' && format[i + 1] != 's' &&
+			 format[i + 1] != '%')
 		{
-			write(1, "invalid", 7);
-			return (-1);
+			write(1, &format[i], 2);
+			count += 2;
+			i += 2;
+			continue;
 		}
 		else
 		{
@@ -41,8 +50,5 @@ int _printf(const char *format, ...)
 		i++;
 	}
 	va_end(args);
-	if (count == 0)
-		return (-1);
-
-	return (count);
+	return ((count == 0) ? -1 : (int)count);
 }
