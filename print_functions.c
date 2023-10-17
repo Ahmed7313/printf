@@ -10,10 +10,10 @@
  */
 int print_char(va_list args)
 {
-	char c = va_arg(args, int);
+    char c = va_arg(args, int);
 
-	write(1, &c, 1);
-	return (1);
+    write(1, &c, 1);
+    return (1);
 }
 
 /**
@@ -23,17 +23,17 @@ int print_char(va_list args)
  */
 int print_str(va_list args)
 {
-	int count = 0;
-	char *str = va_arg(args, char *);
+    int count = 0;
+    char *str = va_arg(args, char *);
 
-	str = str == NULL ? "(null)" : str;
-	while (*str)
-	{
-		write(1, str, 1);
-		str++;
-		count++;
-	}
-	return (count);
+    str = str == NULL ? "(null)" : str;
+    while (*str)
+    {
+        write(1, str, 1);
+        str++;
+        count++;
+    }
+    return (count);
 }
 
 /**
@@ -45,19 +45,19 @@ int print_str(va_list args)
  */
 unsigned int handle_format(const char *format, unsigned int *i, va_list args)
 {
-	unsigned int count = 0;
+    unsigned int count = 0;
 
-	(*i)++;
-	if (format[*i] == 'c')
-		count += print_char(args);
-	else if (format[*i] == 's')
-		count += print_str(args);
-	else
-	{
-		write(1, &format[*i - 1], 2);
-		count += 2;
-	}
-	return (count);
+    (*i)++;
+    if (format[*i] == 'c')
+        count += print_char(args);
+    else if (format[*i] == 's')
+        count += print_str(args);
+    else
+    {
+        write(1, &format[*i - 1], 2);
+        count += 2;
+    }
+    return (count);
 }
 
 /**
@@ -67,6 +67,6 @@ unsigned int handle_format(const char *format, unsigned int *i, va_list args)
  */
 unsigned int handle_unformat(char c)
 {
-	write(1, &c, 1);
-	return (1);
+    write(1, &c, 1);
+    return (1);
 }
