@@ -67,6 +67,8 @@ va_list args, char *buffer, unsigned int *j)
 		count += print_unsignedOct(args, buffer, j);
 	else if (format[*i + 1] == 'x' || format[*i + 1] == 'X')
 		count += print_unsignedHex(args, buffer, j, format[*i + 1]);
+	else if (format[*i + 1] == 'S')
+		count += print_S(args, buffer, j);
 	else if (format[*i + 1] == 'R')
 		count += print_rot13(args, buffer, j);
 	else
