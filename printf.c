@@ -47,6 +47,7 @@ int _printf(const char *format, ...)
 	if (j > 0)
 	{
 		write(1, buffer, j);
+		j = 0;
 	}
 	va_end(args);
 	return ((count == 0) ? -1 : (int)count);
