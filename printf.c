@@ -19,7 +19,6 @@ int _printf(const char *format, ...)
 		return (-1);
 
 	va_start(args, format);
-
 	while (format && format[i])
 	{
 		if (j >= 1023)
@@ -36,6 +35,7 @@ int _printf(const char *format, ...)
 		else if (format[i] == '%')
 		{
 			count += handle_format(format, &i, args, buffer, &j);
+			i++;
 		}
 		else
 		{
@@ -49,6 +49,5 @@ int _printf(const char *format, ...)
 	}
 
 	va_end(args);
-
 	return ((count == 0) ? -1 : (int)count);
 }
