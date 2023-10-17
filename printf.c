@@ -20,17 +20,13 @@ int _printf(const char *format, ...)
 	va_start(args, format);
 	while (format && format[i])
 	{
-		if (format[i] == '%' && format[i + 1] == '\0') /* Add this condition */
-	{
-		return (-1);
-	}
-	else if (format[i] == '%' && format[i + 1] == '%')
-	{
-		write(1, "%", 1);
-		count++;
-		i += 2;
-		continue;
-	}
+		if (format[i] == '%' && format[i + 1] == '%')
+		{
+			write(1, "%", 1);
+			count++;
+			i += 2;
+			continue;
+		}
 		else if (format[i] == '%' &&
 			 (format[i + 1] == 'c' || format[i + 1] == 's'))
 		{
