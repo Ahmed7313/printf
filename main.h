@@ -17,4 +17,5 @@ int print_percent(va_list args);
 int print_intger(va_list args, char *buffer, unsigned int *j);
 int print_Binary(va_list args, char *buffer, unsigned int *j);
 int print_unsignedIntger(va_list args, char *buffer, unsigned int *j);
+int printf_oct(va_list args, char *buffer, unsigned int *j);
 #endif /* MAIN_H */

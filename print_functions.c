@@ -63,6 +63,8 @@ va_list args, char *buffer, unsigned int *j)
 		count += print_Binary(args, buffer, j);
 	else if (format[*i + 1] == 'u')
 		count += print_unsignedIntger(args, buffer, j);
+	else if (format[*i + 1] == 'o')
+		count += printf_oct(args, buffer, j);
 	else
 	{
 		buffer[(*j)++] = format[*i];
