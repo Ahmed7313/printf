@@ -1,47 +1,48 @@
 #include "main.h"
 
 /**
- * print_num_rec - prints an integer recursively
- * @n: Integer
+ * print_intger - print integer for specifier i , d
+ * @args: argument to print
+ *
+ * Return: number of characters printed
  */
-
-void print_num_rec(int n)
+int print_intger(va_list args)
 {
-	unsigned int num = n;
+	int n = va_arg(args, int);
+	int num, last, exp = 1;
 	char digit;
+	int i = 1;
 
-	if (num / 10)
-		print_num_rec(num / 10);
-
-	digit = '0' + num % 10;
-	write(1, &digit, 1);
-}
-
-/**
- * print_intger - prints an integer
- * @vl: Integer
- * Return: int
- */
-
-int print_intger(va_list vl)
-{
-	unsigned int n = va_arg(vl, int);
-	int count = 1, num = n;
-	char digit;
-
-	if (num < 0)
+	if (n < 0)
 	{
 		digit = '-';
 		write(1, &digit, 1);
-		num *= -1;
-		n = num;
-		count += 1;
+		n = -n;
+		i++;
 	}
 
-	while (n > 9)
-		n /= 10,
-			count++;
+	last = n % 10;
+	n = n / 10;
+	num = n;
 
-	print_num_rec(num);
-	return (count);
+	if (num > 0)
+	{
+		while (num / 10 != 0)
+		{
+			exp = exp * 10;
+			num = num / 10;
+		}
+		num = n;
+		while (exp > 0)
+		{
+			digit = (num / exp + '0');
+			write(1, &digit, 1);
+			num = num - (digit * exp);
+			exp = exp / 10;
+			i++;
+		}
+	}
+	digit = (last + '0');
+	write(1, &digit, 1);
+	return (i);
 }
