@@ -1,9 +1,10 @@
 #include "main.h"
+#include <unistd.h>
 
 /**
- * print_char - Prints a character.
- * @args: A list of arguments.
- * Return: 1.
+ * print_char - Writes a character to stdout
+ * @args: The character
+ * Return: 1 on success
  */
 int print_char(va_list args)
 {
@@ -14,36 +15,21 @@ int print_char(va_list args)
 }
 
 /**
- * print_string - Prints a string.
- * @args: A list of arguments.
- * Return: The length of the string.
+ * print_str - Writes a string to stdout
+ * @args: The string
+ * Return: Number of chars written
  */
-int print_string(va_list args)
+int print_str(va_list args)
 {
 	int count = 0;
 	char *str = va_arg(args, char *);
-	char *s = str;
 
-	if (str == NULL)
-		return (0);
-
-	while (*s)
+	str = str == NULL ? "(null)" : str;
+	while (*str)
 	{
-		write(1, s, 1);
+		write(1, str, 1);
+		str++;
 		count++;
-		s++;
 	}
 	return (count);
-}
-
-/**
- * print_percent - Prints a percent symbol.
- * @args: A list of arguments.
- * Return: 1.
- */
-int print_percent(va_list args)
-{
-	(void)args;
-	write(1, "%", 1);
-	return (1);
 }
