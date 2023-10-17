@@ -64,7 +64,7 @@ va_list args, char *buffer, unsigned int *j)
 	else if (format[*i + 1] == 'u')
 		count += print_unsignedIntger(args, buffer, j);
 	else if (format[*i + 1] == 'o')
-		count += printf_oct(args, buffer, j);
+		count += print_unsignedOct(args, buffer, j);
 	else
 	{
 		buffer[(*j)++] = format[*i];

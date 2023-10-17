@@ -1,13 +1,13 @@
 #include "main.h"
 
 /**
- * printf_oct - prints an octal number.
+ * print_unsignedOct - prints an octal number.
  * @args: The va_list of arguments.
  * @buffer: The output buffer.
  * @j: The current buffer index.
  * Return: number of printed digits.
  */
-int printf_oct(va_list args, char *buffer, unsigned int *j)
+int print_unsignedOct(va_list args, char *buffer, unsigned int *j)
 {
 	int i, count = 0;
 	int *array;
