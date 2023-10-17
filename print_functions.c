@@ -1,7 +1,4 @@
 #include "main.h"
-#include <unistd.h>
-#include <stdarg.h>
-#include <stddef.h>
 
 /**
 * print_char - Writes a character to stdout
@@ -60,8 +57,6 @@ unsigned int handle_format(const char *format, unsigned int *i, va_list args)
 		count += print_unsignedIntger(args);
 	else if (format[*i + 1] == 'o')
 		count += print_unsignedOctal(args);
-	else if (format[*i + 1] == 'x')
-		count += print_unsignedHex(args);
 	else
 	{
 		write(1, &format[*i], 2);
