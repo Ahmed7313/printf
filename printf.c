@@ -31,6 +31,7 @@ int _printf(const char *format, ...)
 		{
 			buffer[j++] = '%';
 			i += 2;
+			count++;
 		}
 		else if (format[i] == '%')
 		{
@@ -40,14 +41,13 @@ int _printf(const char *format, ...)
 		else
 		{
 			buffer[j++] = format[i++];
+			count++;
 		}
 	}
-
 	if (j > 0)
 	{
 		write(1, buffer, j);
 	}
-
 	va_end(args);
 	return ((count == 0) ? -1 : (int)count);
 }
