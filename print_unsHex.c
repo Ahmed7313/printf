@@ -10,7 +10,6 @@ int print_unsignedHex(va_list args)
 {
 	unsigned int number, tmp_number;
 	int count = 0, size = -1;
-	int j;
 	int tmpArr[128];
 	char digit;
 
@@ -29,10 +28,10 @@ int print_unsignedHex(va_list args)
 		size++;
 		tmpArr[size] = tmp_number;
 	}
-	for (j = size - 1; size >= 0; size--)
+	for (; size >= 0; size--)
 	{
 		count++;
-		digit = (char)((tmpArr[size]) + '0');
+		digit = (char) tmpArr[size];
 		write(1, &digit, 1);
 	}
 
