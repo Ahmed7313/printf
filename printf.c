@@ -14,17 +14,25 @@ int _printf(const char *format, ...)
 	unsigned int i = 0, count = 0;
 	va_list args;
 
-	if (format == NULL)
+	if (!format || (format[i] == '%' && format[i + 1] == '\0'))
 		return (-1);
 	va_start(args, format);
 	while (format && format[i])
 	{
-		if (format[i] == '%' && (format[i + 1] == '\0' || format[i + 1] == '%'))
-			count += handle_unformat(format[i + 1]), i += 2;
-		else if (format[i] == '%')
-			count += handle_format(format, &i, args);
+		if (format[i] == '%')
+		{
+			i++;
+			if (format[i] == 'c' || format[i] == 's' || format[i] == '%')
+				count += handle_format(format, &i, args);
+			else
+			{
+				count += handle_unformat('%');
+				count += handle_unformat(format[i]);
+			}
+		}
 		else
-			count += handle_unformat(format[i]), i++;
+			count += handle_unformat(format[i]);
+		i++;
 	}
 	va_end(args);
 	return ((count == 0) ? -1 : (int)count);
