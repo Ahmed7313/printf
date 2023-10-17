@@ -4,3 +4,4 @@ main.dSYM/Contents/Info.plist
 main.c
 .vscode/settings.json
 a.out
+.DS_Store
