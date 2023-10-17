@@ -1,13 +1,13 @@
 #include "main.h"
 
 /**
- * rot13 - encodes a string using rot13.
+ * print_rot13 - encodes a string using rot13.
 * @args: The va_list of arguments.
  * @buffer: The output buffer.
  * @j: The current buffer index.
  * Return: pointer to encoded string.
 */
-int rot13(va_list args, char *buffer, unsigned int *j)
+int print_rot13(va_list args, char *buffer, unsigned int *j)
 {
 	int index;
 	int letterIndex;
@@ -23,9 +23,10 @@ int rot13(va_list args, char *buffer, unsigned int *j)
 			if (str[index] == letters[letterIndex])
 			{
 				buffer[(*j)++] = rot13Code[letterIndex];
+				count++;
 				break;
 			}
 		}
 	}
-	return (str);
+	return (count);
 }

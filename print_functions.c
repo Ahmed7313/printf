@@ -65,6 +65,8 @@ va_list args, char *buffer, unsigned int *j)
 		count += print_unsignedIntger(args, buffer, j);
 	else if (format[*i + 1] == 'o')
 		count += print_unsignedOct(args, buffer, j);
+	else if (format[*i + 1] == 'R')
+		count += print_rot13(args, buffer, j);
 	else
 	{
 		buffer[(*j)++] = format[*i];
