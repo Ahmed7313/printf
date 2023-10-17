@@ -51,6 +51,10 @@ unsigned int handle_format(const char *format, unsigned int *i, va_list args)
 		count += print_char(args);
 	else if (format[*i + 1] == 's')
 		count += print_str(args);
+	else if (format[*i + 1] == 'i' || format[*i + 1] == 'd')
+		count += print_intger(args);
+	else if (format[*i + 1] == 'b')
+		count += print_Binary(args);
 	else
 	{
 		write(1, &format[*i], 2);
