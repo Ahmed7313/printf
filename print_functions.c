@@ -57,6 +57,9 @@ unsigned int handle_format(const char *format, unsigned int *i,
 		count += print_char(args, buffer, j);
 	else if (format[*i + 1] == 's')
 		count += print_str(args, buffer, j);
+	else if (format[*i + 1] == 'd' || format[*i + 1] == 'i')
+		count += print_int(args, buffer, j);
+	/* Add more conditions here for other format specifiers */
 	else
 	{
 		buffer[(*j)++] = format[*i];
