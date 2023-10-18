@@ -57,12 +57,6 @@ unsigned int handle_format(const char *format, unsigned int *i,
 		count += print_char(args, buffer, j);
 	else if (format[*i + 1] == 's')
 		count += print_str(args, buffer, j);
-	else if (format[*i + 1] == 'i' || format[*i + 1] == 'd')
-		count += print_intger(args, buffer, j);
-	else if (format[*i + 1] == 'b')
-		count += print_Binary(args, buffer, j);
-	else if (format[*i + 1] == 'u')
-		count += print_unsignedIntger(args, buffer, j);
 	else
 	{
 		buffer[(*j)++] = format[*i];
@@ -90,13 +84,13 @@ unsigned int handle_unformat(char c)
  */
 int is_valid_specifier(char c)
 {
-    char valid_specifiers[] = "csidbuoxX";
-    int i;
+	char valid_specifiers[] = "csidbuoxX";
+	int i;
 
-    for (i = 0; valid_specifiers[i]; i++)
-    {
-        if (c == valid_specifiers[i])
-            return (1);
-    }
-    return (0);
+	for (i = 0; valid_specifiers[i]; i++)
+	{
+		if (c == valid_specifiers[i])
+			return (1);
+	}
+	return (0);
 }
