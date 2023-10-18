@@ -1,54 +1,44 @@
 #include "main.h"
 #include <stdarg.h>
-#include <stddef.h>
+#include <stdlib.h>
 #include <unistd.h>
 
 /**
  * _printf - Our custom printf function.
  * @format: The format string.
- * @... : The values to format and print.
- * Return: The number of characters printed or -1 on error.
+ * ...
+ * Return: The number of characters printed.
  */
 int _printf(const char *format, ...)
 {
-	char buffer[1024];
-	unsigned int i = 0, j = 0, count = 0;
 	va_list args;
+	unsigned int i = 0, j = 0, count = 0;
+	char *buffer = malloc(1024);
+	size_t buffer_size = 1024;
 
-	if (format == NULL)
+	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
 		return (-1);
-
 	va_start(args, format);
 	while (format && format[i])
 	{
-		if (j >= 1023)
-		{
-			write(1, buffer, j);
-			j = 0;
-		}
-
-		if (format[i] == '%' && format[i + 1] == '%')
-		{
-			buffer[j++] = '%';
-			i += 2;
-			count++;
-		}
-		else if (format[i] == '%')
+		if (format[i] == '%' && format[i + 1] != '\0')
 		{
 			count += handle_format(format, &i, args, buffer, &j);
-			i++;
 		}
 		else
 		{
-			buffer[j++] = format[i++];
+			buffer[j++] = format[i];
 			count++;
 		}
+		if (j >= buffer_size - 1)
+		{
+			buffer_size *= 2;
+			buffer = realloc(buffer, buffer_size);
+		}
+		i++;
 	}
-	if (j > 0)
-	{
-		write(1, buffer, j);
-		j = 0;
-	}
+	write(1, buffer, j);
+	free(buffer);
 	va_end(args);
-	return ((count == 0) ? -1 : (int)count);
+	return (count);
 }
