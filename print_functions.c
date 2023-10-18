@@ -49,7 +49,7 @@ int print_str(va_list args, char *buffer, unsigned int *j)
  * Return: The count of characters printed.
  */
 unsigned int handle_format(const char *format, unsigned int *i,
-va_list args, char *buffer, unsigned int *j)
+			   va_list args, char *buffer, unsigned int *j)
 {
 	unsigned int count = 0;
 
@@ -63,20 +63,10 @@ va_list args, char *buffer, unsigned int *j)
 		count += print_Binary(args, buffer, j);
 	else if (format[*i + 1] == 'u')
 		count += print_unsignedIntger(args, buffer, j);
-	else if (format[*i + 1] == 'o')
-		count += print_unsignedOct(args, buffer, j);
-	else if (format[*i + 1] == 'x' || format[*i + 1] == 'X')
-		count += print_unsignedHex(args, buffer, j, format[*i + 1]);
-	else if (format[*i + 1] == 'S')
-		count += print_S(args, buffer, j);
-	else if (format[*i + 1] == 'r')
-		count += print_rev(args, buffer, j);
-	else if (format[*i + 1] == 'R')
-		count += print_rot13(args, buffer, j);
 	else
 	{
 		buffer[(*j)++] = format[*i];
-		count += 2;
+		count += 1;
 	}
 	(*i)++;
 	return (count);
