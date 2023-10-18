@@ -82,3 +82,21 @@ unsigned int handle_unformat(char c)
 	write(1, &c, 1);
 	return (1);
 }
+
+/**
+ * is_valid_specifier - Checks if a character is a valid format specifier.
+ * @c: The character to check.
+ * Return: 1 if valid, 0 otherwise.
+ */
+int is_valid_specifier(char c)
+{
+    char valid_specifiers[] = "csidbuoxX";
+    int i;
+
+    for (i = 0; valid_specifiers[i]; i++)
+    {
+        if (c == valid_specifiers[i])
+            return (1);
+    }
+    return (0);
+}

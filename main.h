@@ -23,4 +23,5 @@ int print_unsignedHex(va_list args, char *buffer, unsigned int *j, char sp);
 int print_S(va_list args, char *buffer, unsigned int *j);
 int print_rev(va_list args, char *buffer, unsigned int *j);
 int print_rot13(va_list args, char *buffer, unsigned int *j);
+int is_valid_specifier(char c);
 #endif /* MAIN_H */
