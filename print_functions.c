@@ -49,7 +49,7 @@ int print_str(va_list args, char *buffer, unsigned int *j)
  * Return: The count of characters printed.
  */
 unsigned int handle_format(const char *format, unsigned int *i,
-			   va_list args, char *buffer, unsigned int *j)
+						   va_list args, char *buffer, unsigned int *j)
 {
 	unsigned int count = 0;
 
