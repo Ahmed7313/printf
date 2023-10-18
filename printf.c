@@ -14,13 +14,12 @@ int _printf(const char *format, ...)
 	va_list args;
 	unsigned int i = 0, j = 0, count = 0;
 	char *buffer = malloc(1024);
+	size_t buffer_size = 1024;
 
 	if (buffer == NULL)
 	{
 		return (-1);
 	}
-
-	size_t buffer_size = 1024;
 
 	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
 		return (-1);
