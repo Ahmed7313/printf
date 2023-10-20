@@ -20,6 +20,8 @@ int handle_specifier(char c, va_list args)
 		break;
 	case 's':
 		str = va_arg(args, char *);
+		if (str == NULL)
+			str = "(null)";
 		count += write(1, str, strlen(str));
 		break;
 	case '%':

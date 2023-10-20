@@ -12,10 +12,19 @@ int _printf(const char *format, ...)
 	va_list args;
 	char temp;
 
+	if (format == NULL)
+		return (-1);
+
 	va_start(args, format);
-	while (format && format[i])
+	while (format[i])
 	{
-		if (format[i] == '%' && (format[i + 1] == 'c' ||
+		if (format[i] == '%' && format[i + 1] == '%')
+		{
+			temp = '%';
+			count += write(1, &temp, 1);
+			i++;
+		}
+		else if (format[i] == '%' && (format[i + 1] == 'c' ||
 			format[i + 1] == 's' || format[i + 1] == '%'))
 		{
 			count += handle_specifier(format[i + 1], args);
