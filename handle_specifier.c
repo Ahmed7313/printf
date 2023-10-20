@@ -1,4 +1,5 @@
 #include "main.h"
+#include <stdio.h>  /* For debugging purposes */
 
 /**
  * handle_specifier - Handles specifiers.
@@ -11,6 +12,8 @@ int handle_specifier(char c, va_list args)
 	int count = 0;
 	char *str;
 	char temp;
+
+	printf("Handling specifier: %c\n", c);  /* Debug print */
 
 	switch (c)
 	{
@@ -28,6 +31,10 @@ int handle_specifier(char c, va_list args)
 		temp = '%';
 		count += write(1, &temp, 1);
 		break;
+	default:
+		printf("Unknown specifier: %c\n", c);  /* Debug print */
+		break;
 	}
+
 	return (count);
 }
