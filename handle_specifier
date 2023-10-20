@@ -1,0 +1,28 @@
+#include "main.h"
+
+/**
+ * handle_specifier - Handles specifiers.
+ * @c: The specifier.
+ * @args: The argument list.
+ * Return: The number of characters printed.
+ */
+int handle_specifier(char c, va_list args)
+{
+    int count = 0;
+    char *str;
+
+    switch (c)
+    {
+    case 'c':
+        count += write(1, &((char[]){(char)va_arg(args, int)}), 1);
+        break;
+    case 's':
+        str = va_arg(args, char *);
+        count += write(1, str, strlen(str));
+        break;
+    case '%':
+        count += write(1, &((char[]){'%'}), 1);
+        break;
+    }
+    return (count);
+}
