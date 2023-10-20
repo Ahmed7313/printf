@@ -1,4 +1,6 @@
 #include "main.h"
+#include <stdarg.h>
+#include <unistd.h>
 
 /**
  * _printf - Custom printf function.
@@ -14,21 +16,17 @@ int _printf(const char *format, ...)
 
 	if (format == NULL)
 		return (-1);
-
 	va_start(args, format);
 	while (format[i])
 	{
-		if (format[i] == '%' && format[i + 1] == '%')
-		{
-			temp = '%';
-			count += write(1, &temp, 1);
-			i++;
-		}
-		else if (format[i] == '%' && (format[i + 1] == 'c' ||
-			format[i + 1] == 's' || format[i + 1] == '%'))
+		if (format[i] == '%' && format[i + 1])
 		{
 			count += handle_specifier(format[i + 1], args);
 			i++;
+		}
+		else if (format[i] == '%' && !format[i + 1])
+		{
+			return (-1);
 		}
 		else
 		{

@@ -1,4 +1,7 @@
 #include "main.h"
+#include <stdarg.h>
+#include <unistd.h>
+#include <string.h>
 
 /**
  * handle_specifier - Handles specifiers.
@@ -29,8 +32,9 @@ int handle_specifier(char c, va_list args)
 		count += write(1, &temp, 1);
 		break;
 	default:
+		temp = c;
+		count += write(1, &temp, 1);
 		break;
 	}
-
 	return (count);
 }
