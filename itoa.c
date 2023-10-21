@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include "main.h"
 
 /**
  * itoa - Convert integer to string
@@ -9,6 +10,8 @@ char *itoa(int n)
 {
 	char *str = malloc(12);
 	int i = 0, sign = n;
+	int start, end;
+	char temp;
 
 	if (str == NULL)
 		return (NULL);
@@ -25,9 +28,12 @@ char *itoa(int n)
 
 	str[i] = '\0';
 
-	for (int start = 0, end = i - 1; start < end; start++, end--)
+	start = 0;
+	end = i - 1;
+
+	for (; start < end; start++, end--)
 	{
-		char temp = str[start];
+		temp = str[start];
 		str[start] = str[end];
 		str[end] = temp;
 	}
