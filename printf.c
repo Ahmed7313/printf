@@ -8,7 +8,6 @@
  * @... : The values to format and print.
  * Return: The number of characters printed.
  */
-
 int _printf(const char *format, ...)
 {
 	unsigned int i = 0, count = 0;
@@ -20,13 +19,9 @@ int _printf(const char *format, ...)
 	va_start(args, format);
 	while (format[i])
 	{
-		if (format[i] == '%' && format[i + 1] == '%')
-		{
-			temp = '%';
-			count += write(1, &temp, 1);
-			i++;
-		}
-		else if (format[i] == '%' && format[i + 1])
+		if (format[i] == '%' && (format[i + 1] == 'c' 
+					|| format[i + 1] == 's'
+				       	|| format[i + 1] == '%'))
 		{
 			count += handle_specifier(format[i + 1], args);
 			i++;
