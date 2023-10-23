@@ -1,17 +1,17 @@
 #include "main.h"
 
 /**
- * str_len - Calculates the length of a string.
- * @str: The string.
+ * _strlen - Returns the length of a string.
+ * @s: The string.
  * Return: The length of the string.
  */
-int str_len(char *str)
+int _strlen(char *s)
 {
-	int len = 0;
+	int length = 0;
 
-	while (str[len])
-		len++;
-	return (len);
+	while (*s++)
+		length++;
+	return (length);
 }
 
 /**
@@ -65,21 +65,36 @@ int handle_specifier(char c, va_list args)
 {
 	int count = 0;
 	char *str;
+	char ch;
 
 	switch (c)
 	{
+	case 'c':
+		ch = (char)va_arg(args, int);
+		write(1, &ch, 1);
+		count++;
+		break;
+	case 's':
+		str = va_arg(args, char *);
+		if (str == NULL)
+			str = "(null)";
+		count += write(1, str, _strlen(str));
+		break;
 	case 'd':
 	case 'i':
 		str = int_to_str(va_arg(args, int));
 		if (str)
 		{
-			count += write_str(str);
+			count += write(1, str, _strlen(str));
 			free(str);
 		}
+		break;
+	case '%':
+		write(1, &c, 1);
+		count++;
 		break;
 	default:
 		break;
 	}
-
 	return (count);
 }
