@@ -1,37 +1,58 @@
 #include "main.h"
-#include <stdarg.h>
-#include <unistd.h>
-#include <string.h>
-#include <stdlib.h>
 
 /**
- * handle_d - Handles the 'd' specifier.
- * @num: The integer to print.
- * Return: The number of characters printed.
+ * str_len - Calculates the length of a string.
+ * @str: The string.
+ * Return: The length of the string.
  */
-int handle_d(int num)
+int str_len(char *str)
 {
-	char *str = itoa(num);
-	int count;
+	int len = 0;
 
-	count = write(1, str, strlen(str));
-	free(str);
-	return (count);
+	while (str[len])
+		len++;
+	return (len);
 }
 
 /**
- * handle_i - Handles the 'i' specifier.
- * @num: The integer to print.
- * Return: The number of characters printed.
+ * int_to_str - Converts an integer to a string.
+ * @num: The integer.
+ * Return: The converted string.
  */
-int handle_i(int num)
+char *int_to_str(int num)
 {
-	char *str = itoa(num);
-	int count;
+	char *str;
+	int temp, digits = 0;
 
-	count = write(1, str, strlen(str));
-	free(str);
-	return (count);
+	temp = num;
+	while (temp)
+	{
+		digits++;
+		temp /= 10;
+	}
+
+	str = malloc(digits + 1);
+	if (!str)
+		return (NULL);
+
+	str[digits] = '\0';
+	while (digits--)
+	{
+		str[digits] = (num % 10) + '0';
+		num /= 10;
+	}
+
+	return (str);
+}
+
+/**
+ * write_str - Writes a string to stdout.
+ * @str: The string.
+ * Return: The number of characters written.
+ */
+int write_str(char *str)
+{
+	return (write(1, str, str_len(str)));
 }
 
 /**
@@ -43,31 +64,22 @@ int handle_i(int num)
 int handle_specifier(char c, va_list args)
 {
 	int count = 0;
-	char temp;
+	char *str;
 
 	switch (c)
 	{
-	case 'c':
-		temp = (char)va_arg(args, int);
-		count += write(1, &temp, 1);
-		break;
-	case 's':
-		count += handle_s(va_arg(args, char *));
-		break;
-	case '%':
-		temp = '%';
-		count += write(1, &temp, 1);
-		break;
 	case 'd':
-		count += handle_d(va_arg(args, int));
-		break;
 	case 'i':
-		count += handle_i(va_arg(args, int));
+		str = int_to_str(va_arg(args, int));
+		if (str)
+		{
+			count += write_str(str);
+			free(str);
+		}
 		break;
 	default:
-		temp = c;
-		count += write(1, &temp, 1);
 		break;
 	}
+
 	return (count);
 }
